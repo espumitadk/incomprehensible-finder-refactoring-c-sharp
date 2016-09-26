@@ -4,44 +4,44 @@ namespace Algorithm
 {
     public class Finder
     {
-        private readonly List<Person> _p;
+        private readonly List<Person> people;
 
-        public Finder(List<Person> p)
+        public Finder(List<Person> people)
         {
-            _p = p;
+            this.people = people;
         }
 
-        public F FindUsing(Rule rule)
+        public QueryResult FindUsing(Rule rule)
         {
-            var tr = new List<F>();
+            var queryResult = new List<QueryResult>();
 
-            for(var i = 0; i < _p.Count - 1; i++)
+            for(var i = 0; i < people.Count - 1; i++)
             {
-                for(var j = i + 1; j < _p.Count; j++)
+                for(var j = i + 1; j < people.Count; j++)
                 {
-                    var r = new F();
-                    if(_p[i].BirthDate < _p[j].BirthDate)
+                    var result = new QueryResult();
+                    if(people[i].BirthDate < people[j].BirthDate)
                     {
-                        r.FirstPerson = _p[i];
-                        r.SecondPerson = _p[j];
+                        result.FirstPerson = people[i];
+                        result.SecondPerson = people[j];
                     }
                     else
                     {
-                        r.FirstPerson = _p[j];
-                        r.SecondPerson = _p[i];
+                        result.FirstPerson = people[j];
+                        result.SecondPerson = people[i];
                     }
-                    r.D = r.SecondPerson.BirthDate - r.FirstPerson.BirthDate;
-                    tr.Add(r);
+                    result.D = result.SecondPerson.BirthDate - result.FirstPerson.BirthDate;
+                    queryResult.Add(result);
                 }
             }
 
-            if(tr.Count < 1)
+            if(queryResult.Count < 1)
             {
-                return new F();
+                return new QueryResult();
             }
 
-            F answer = tr[0];
-            foreach(var result in tr)
+            QueryResult answer = queryResult[0];
+            foreach(var result in queryResult)
             {
                 switch(rule)
                 {
