@@ -4,14 +4,14 @@ namespace Algorithm
 {
     public class Finder
     {
-        private readonly List<Thing> _p;
+        private readonly List<Person> _p;
 
-        public Finder(List<Thing> p)
+        public Finder(List<Person> p)
         {
             _p = p;
         }
 
-        public F Find(FT ft)
+        public F FindUsing(Rule rule)
         {
             var tr = new List<F>();
 
@@ -22,15 +22,15 @@ namespace Algorithm
                     var r = new F();
                     if(_p[i].BirthDate < _p[j].BirthDate)
                     {
-                        r.P1 = _p[i];
-                        r.P2 = _p[j];
+                        r.FirstPerson = _p[i];
+                        r.SecondPerson = _p[j];
                     }
                     else
                     {
-                        r.P1 = _p[j];
-                        r.P2 = _p[i];
+                        r.FirstPerson = _p[j];
+                        r.SecondPerson = _p[i];
                     }
-                    r.D = r.P2.BirthDate - r.P1.BirthDate;
+                    r.D = r.SecondPerson.BirthDate - r.FirstPerson.BirthDate;
                     tr.Add(r);
                 }
             }
@@ -43,16 +43,16 @@ namespace Algorithm
             F answer = tr[0];
             foreach(var result in tr)
             {
-                switch(ft)
+                switch(rule)
                 {
-                    case FT.One:
+                    case Rule.Closest:
                         if(result.D < answer.D)
                         {
                             answer = result;
                         }
                         break;
 
-                    case FT.Two:
+                    case Rule.Furthest:
                         if(result.D > answer.D)
                         {
                             answer = result;

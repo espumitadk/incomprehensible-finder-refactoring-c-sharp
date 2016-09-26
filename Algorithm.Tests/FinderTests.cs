@@ -6,81 +6,81 @@ namespace Algorithm.Test
 {    
     public class FinderTests
     {
+        private readonly Person sue = new Person("Sue", new DateTime(1950, 1, 1));
+        private readonly Person greg = new Person("Greg", new DateTime(1952, 6, 1));
+        private readonly Person sarah = new Person("Sarah", new DateTime(1982, 1, 1));
+        private readonly Person mike = new Person("Mike", new DateTime(1979, 1, 1));
+
         [Fact]
         public void Returns_Empty_Results_When_Given_Empty_List()
         {
-            var list = new List<Thing>();
-            var finder = new Finder(list);
+            var people = new List<Person>();
+            var finder = new Finder(people);
 
-            var result = finder.Find(FT.One);
+            var result = finder.FindUsing(Rule.Closest);
 
-            Assert.Null(result.P1);
-            Assert.Null(result.P2);
+            Assert.Null(result.FirstPerson);
+            Assert.Null(result.SecondPerson);
         }
 
         [Fact]
         public void Returns_Empty_Results_When_Given_One_Person()
         {
-            var list = new List<Thing>() { sue };
-            var finder = new Finder(list);
+            var people = new List<Person>() { sue };
+            var finder = new Finder(people);
 
-            var result = finder.Find(FT.One);
+            var result = finder.FindUsing(Rule.Closest);
 
-            Assert.Null(result.P1);
-            Assert.Null(result.P2);
+            Assert.Null(result.FirstPerson);
+            Assert.Null(result.SecondPerson);
         }
 
         [Fact]
         public void Returns_Closest_Two_For_Two_People()
         {
-            var list = new List<Thing>() { sue, greg };
-            var finder = new Finder(list);
+            var people = new List<Person>() { sue, greg };
+            var finder = new Finder(people);
 
-            var result = finder.Find(FT.One);
+            var result = finder.FindUsing(Rule.Closest);
 
-            Assert.Same(sue, result.P1);
-            Assert.Same(greg, result.P2);
+            Assert.Same(sue, result.FirstPerson);
+            Assert.Same(greg, result.SecondPerson);
         }
 
         [Fact]
         public void Returns_Furthest_Two_For_Two_People()
         {
-            var list = new List<Thing>() { greg, mike };
-            var finder = new Finder(list);
+            var people = new List<Person>() { greg, mike };
+            var finder = new Finder(people);
 
-            var result = finder.Find(FT.Two);
+            var result = finder.FindUsing(Rule.Furthest);
 
-            Assert.Same(greg, result.P1);
-            Assert.Same(mike, result.P2);
+            Assert.Same(greg, result.FirstPerson);
+            Assert.Same(mike, result.SecondPerson);
         }
 
         [Fact]
         public void Returns_Furthest_Two_For_Four_People()
         {
-            var list = new List<Thing>() { greg, mike, sarah, sue };
-            var finder = new Finder(list);
+            var people = new List<Person>() { greg, mike, sarah, sue };
+            var finder = new Finder(people);
 
-            var result = finder.Find(FT.Two);
+            var result = finder.FindUsing(Rule.Furthest);
 
-            Assert.Same(sue, result.P1);
-            Assert.Same(sarah, result.P2);
+            Assert.Same(sue, result.FirstPerson);
+            Assert.Same(sarah, result.SecondPerson);
         }
 
         [Fact]
         public void Returns_Closest_Two_For_Four_People()
         {
-            var list = new List<Thing>() { greg, mike, sarah, sue };
-            var finder = new Finder(list);
+            var people = new List<Person>() { greg, mike, sarah, sue };
+            var finder = new Finder(people);
 
-            var result = finder.Find(FT.One);
+            var result = finder.FindUsing(Rule.Closest);
 
-            Assert.Same(sue, result.P1);
-            Assert.Same(greg, result.P2);
+            Assert.Same(sue, result.FirstPerson);
+            Assert.Same(greg, result.SecondPerson);
         }
-
-        Thing sue = new Thing() {Name = "Sue", BirthDate = new DateTime(1950, 1, 1)};
-        Thing greg = new Thing() {Name = "Greg", BirthDate = new DateTime(1952, 6, 1)};
-        Thing sarah = new Thing() { Name = "Sarah", BirthDate = new DateTime(1982, 1, 1) };
-        Thing mike = new Thing() { Name = "Mike", BirthDate = new DateTime(1979, 1, 1) };
     }
 }
