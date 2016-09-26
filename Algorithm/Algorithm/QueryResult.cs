@@ -6,6 +6,6 @@ namespace Algorithm
     {
         public Person FirstPerson { get; set; }
         public Person SecondPerson { get; set; }
-        public TimeSpan D { get; set; }
+        public TimeSpan BirthDateDiference { get; set; }
     }
 }

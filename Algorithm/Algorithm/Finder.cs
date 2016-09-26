@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Algorithm
 {
@@ -30,7 +31,7 @@ namespace Algorithm
                         result.FirstPerson = people[j];
                         result.SecondPerson = people[i];
                     }
-                    result.D = result.SecondPerson.BirthDate - result.FirstPerson.BirthDate;
+                    result.BirthDateDiference = BirthDateDiference(result);
                     queryResult.Add(result);
                 }
             }
@@ -46,14 +47,14 @@ namespace Algorithm
                 switch(rule)
                 {
                     case Rule.Closest:
-                        if(result.D < answer.D)
+                        if(result.BirthDateDiference < answer.BirthDateDiference)
                         {
                             answer = result;
                         }
                         break;
 
                     case Rule.Furthest:
-                        if(result.D > answer.D)
+                        if(result.BirthDateDiference > answer.BirthDateDiference)
                         {
                             answer = result;
                         }
@@ -62,6 +63,11 @@ namespace Algorithm
             }
 
             return answer;
+        }
+
+        private static TimeSpan BirthDateDiference(QueryResult result)
+        {
+            return result.SecondPerson.BirthDate - result.FirstPerson.BirthDate;
         }
     }
 }
