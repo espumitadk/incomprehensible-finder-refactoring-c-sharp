@@ -12,7 +12,7 @@ namespace Algorithm
         {
             FirstPerson = firstPerson;
             SecondPerson = secondPerson;
-            BirthDateDiference = secondPerson.BirthDate - firstPerson.BirthDate;
+            BirthDateDiference = CalculateBirthDateDiference(firstPerson, secondPerson);
         }
 
         public QueryResult()
@@ -20,5 +20,9 @@ namespace Algorithm
 
         }
 
+        private TimeSpan CalculateBirthDateDiference(Person firstPerson, Person secondPerson)
+        {
+            return secondPerson.BirthDate - firstPerson.BirthDate;
+        }
     }
 }
