@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Algorithm
 {
@@ -14,60 +16,40 @@ namespace Algorithm
 
         public QueryResult FindUsing(Rule rule)
         {
-            var queryResult = new List<QueryResult>();
-
-            for(var i = 0; i < people.Count - 1; i++)
+            if (people.Count < 2) return new QueryResult();
+            var orderPeople = OrderInAsceningOrder();
+            if (Rule.Furthest.Equals(rule))
             {
-                for(var j = i + 1; j < people.Count; j++)
+                return new QueryResult(orderPeople.First(), orderPeople.Last());
+            }
+            else
+            {
+                var queryResult = new QueryResult(orderPeople.First(), orderPeople[1]);
+                for (int i = 2; i < orderPeople.Count; i++)
                 {
-                    var result = new QueryResult();
-                    if(people[i].BirthDate < people[j].BirthDate)
+                    if (PeopleHasCloserBirthDate(orderPeople[i - 1], orderPeople[i], queryResult))
                     {
-                        result.FirstPerson = people[i];
-                        result.SecondPerson = people[j];
+                        queryResult = new QueryResult(orderPeople[i - 1], orderPeople[i]);
                     }
-                    else
-                    {
-                        result.FirstPerson = people[j];
-                        result.SecondPerson = people[i];
-                    }
-                    result.BirthDateDiference = BirthDateDiference(result);
-                    queryResult.Add(result);
                 }
+                return queryResult;
+
             }
-
-            if(queryResult.Count < 1)
-            {
-                return new QueryResult();
-            }
-
-            QueryResult answer = queryResult[0];
-            foreach(var result in queryResult)
-            {
-                switch(rule)
-                {
-                    case Rule.Closest:
-                        if(result.BirthDateDiference < answer.BirthDateDiference)
-                        {
-                            answer = result;
-                        }
-                        break;
-
-                    case Rule.Furthest:
-                        if(result.BirthDateDiference > answer.BirthDateDiference)
-                        {
-                            answer = result;
-                        }
-                        break;
-                }
-            }
-
-            return answer;
         }
 
-        private static TimeSpan BirthDateDiference(QueryResult result)
+        private List<Person> OrderInAsceningOrder()
         {
-            return result.SecondPerson.BirthDate - result.FirstPerson.BirthDate;
+            return people.OrderBy(x => x.BirthDate).ToList();
+        }
+
+        private bool PeopleHasCloserBirthDate(Person younger, Person older, QueryResult queryResult)
+        {
+            return BirthDateDiference(younger, older) < queryResult.BirthDateDiference;
+        }
+
+        private static TimeSpan BirthDateDiference(Person younger, Person older)
+        {
+            return older.BirthDate - younger.BirthDate;
         }
     }
 }

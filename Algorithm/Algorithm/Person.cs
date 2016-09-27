@@ -12,5 +12,6 @@ namespace Algorithm
             Name = name;
             BirthDate = birthDate;
         }
+
     }
 }
