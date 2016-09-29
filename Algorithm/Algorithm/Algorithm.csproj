@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Finder.cs" />
+    <Compile Include="FindRules\FurthestRule.cs" />
     <Compile Include="QueryResult.cs" />
-    <Compile Include="Rule.cs" />
+    <Compile Include="FindRules\ClosestRule.cs" />
+    <Compile Include="FindRules\Rule.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

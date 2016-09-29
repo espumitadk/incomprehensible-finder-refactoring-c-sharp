@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Algorithm.FindRules;
 using Xunit;
 
 namespace Algorithm.Test
@@ -17,7 +18,7 @@ namespace Algorithm.Test
             var people = new List<Person>();
             var finder = new Finder(people);
 
-            var result = finder.FindUsing(Rule.Closest);
+            var result = finder.FindUsing(new ClosestRule());
 
             Assert.Null(result.FirstPerson);
             Assert.Null(result.SecondPerson);
@@ -29,7 +30,7 @@ namespace Algorithm.Test
             var people = new List<Person>() { sue };
             var finder = new Finder(people);
 
-            var result = finder.FindUsing(Rule.Closest);
+            var result = finder.FindUsing(new ClosestRule());
 
             Assert.Null(result.FirstPerson);
             Assert.Null(result.SecondPerson);
@@ -41,7 +42,7 @@ namespace Algorithm.Test
             var people = new List<Person>() { sue, greg };
             var finder = new Finder(people);
 
-            var result = finder.FindUsing(Rule.Closest);
+            var result = finder.FindUsing(new ClosestRule());
 
             Assert.Same(sue, result.FirstPerson);
             Assert.Same(greg, result.SecondPerson);
@@ -53,7 +54,7 @@ namespace Algorithm.Test
             var people = new List<Person>() { greg, mike };
             var finder = new Finder(people);
 
-            var result = finder.FindUsing(Rule.Furthest);
+            var result = finder.FindUsing(new FurthestRule());
 
             Assert.Same(greg, result.FirstPerson);
             Assert.Same(mike, result.SecondPerson);
@@ -65,7 +66,7 @@ namespace Algorithm.Test
             var people = new List<Person>() { greg, mike, sarah, sue };
             var finder = new Finder(people);
 
-            var result = finder.FindUsing(Rule.Furthest);
+            var result = finder.FindUsing(new FurthestRule());
 
             Assert.Same(sue, result.FirstPerson);
             Assert.Same(sarah, result.SecondPerson);
@@ -77,7 +78,7 @@ namespace Algorithm.Test
             var people = new List<Person>() { greg, mike, sarah, sue };
             var finder = new Finder(people);
 
-            var result = finder.FindUsing(Rule.Closest);
+            var result = finder.FindUsing(new ClosestRule());
 
             Assert.Same(sue, result.FirstPerson);
             Assert.Same(greg, result.SecondPerson);
