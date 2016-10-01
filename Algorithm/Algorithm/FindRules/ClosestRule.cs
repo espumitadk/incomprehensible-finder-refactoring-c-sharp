@@ -6,7 +6,7 @@ namespace Algorithm.FindRules
 {
     public class ClosestRule : Rule
     {
-        public QueryResult ApplyOn(List<Person> people)
+        public virtual QueryResult ApplyOn(List<Person> people)
         {
             return NotEnougt(people) ? new QueryResult() : Find(people);
         }

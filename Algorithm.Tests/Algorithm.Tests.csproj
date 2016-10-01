@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FinderShould.cs" />
     <Compile Include="FindRules\ClosestRuleShould.cs" />
     <Compile Include="FindRules\FurthestRuleShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
