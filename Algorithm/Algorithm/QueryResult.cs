@@ -8,16 +8,16 @@ namespace Algorithm
         public Person SecondPerson { get; set; }
         public TimeSpan BirthDateDiference { get; set; }
 
+        public QueryResult()
+        {
+
+        }
+
         public QueryResult(Person firstPerson, Person secondPerson)
         {
             FirstPerson = firstPerson;
             SecondPerson = secondPerson;
             BirthDateDiference = CalculateBirthDateDiference(firstPerson, secondPerson);
-        }
-
-        public QueryResult()
-        {
-
         }
 
         private TimeSpan CalculateBirthDateDiference(Person firstPerson, Person secondPerson)
