@@ -8,10 +8,10 @@ namespace Algorithm.FindRules
     {
         public virtual QueryResult ApplyOn(List<Person> people)
         {
-            return NotEnougt(people) ? new QueryResult() : Find(people);
+            return NotEnough(people) ? new QueryResult() : Find(people);
         }
 
-        private bool NotEnougt(List<Person> people)
+        private bool NotEnough(List<Person> people)
         {
             return people.Count < 2;
         }
