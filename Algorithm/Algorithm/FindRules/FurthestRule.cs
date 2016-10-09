@@ -5,23 +5,23 @@ namespace Algorithm.FindRules
 {
     public class FurthestRule : Rule
     {
-        public virtual QueryResult ApplyOn(List<Person> people)
+        public virtual FindResults ApplyOn(List<RealPerson> people)
         {
-            return NotEnough(people) ? new QueryResult() : Find(people);
+            return NotEnough(people) ? FindResults.NoFindResults() : Find(people);
         }
 
-        private bool NotEnough(List<Person> people)
+        private bool NotEnough(List<RealPerson> people)
         {
             return people.Count < 2;
         }
 
-        private QueryResult Find(List<Person> people)
+        private FindResults Find(List<RealPerson> people)
         {
             var orderPeople = SortInAsceningOrder(people);
-            return new QueryResult(orderPeople.First(), orderPeople.Last());
+            return new FindResults(orderPeople.First(), orderPeople.Last());
         }
 
-        private List<Person> SortInAsceningOrder(List<Person> people)
+        private List<RealPerson> SortInAsceningOrder(List<RealPerson> people)
         {
             return people.OrderBy(x => x.BirthDate).ToList();
         }

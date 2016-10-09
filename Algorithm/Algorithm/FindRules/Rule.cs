@@ -4,7 +4,7 @@ namespace Algorithm.FindRules
 {
     public interface Rule
     {
-        QueryResult ApplyOn(List<Person> people);
+        FindResults ApplyOn(List<RealPerson> people);
     }
 
 }

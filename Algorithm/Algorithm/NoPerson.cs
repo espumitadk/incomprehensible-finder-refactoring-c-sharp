@@ -1,6 +1,6 @@
 ﻿namespace Algorithm
 {
-    public interface Person
+    public class NoPerson : Person
     {
         
     }

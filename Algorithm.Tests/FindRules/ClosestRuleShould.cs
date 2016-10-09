@@ -10,10 +10,10 @@ namespace Algorithm.Tests.FindRules
     [TestFixture]
     public class ClosestRuleShould
     {
-        private readonly Person sue = new Person("Sue", new DateTime(1950, 1, 1));
-        private readonly Person greg = new Person("Greg", new DateTime(1952, 6, 1));
-        private readonly Person sarah = new Person("Sarah", new DateTime(1982, 1, 1));
-        private readonly Person mike = new Person("Mike", new DateTime(1979, 1, 1));
+        private readonly RealPerson sue = new RealPerson("Sue", new DateTime(1950, 1, 1));
+        private readonly RealPerson greg = new RealPerson("Greg", new DateTime(1952, 6, 1));
+        private readonly RealPerson sarah = new RealPerson("Sarah", new DateTime(1982, 1, 1));
+        private readonly RealPerson mike = new RealPerson("Mike", new DateTime(1979, 1, 1));
         private ClosestRule closestRule;
 
 
@@ -27,49 +27,49 @@ namespace Algorithm.Tests.FindRules
         [Test]
         public void Returns_Empty_Results_When_Given_Empty_List()
         {
-            var people = new List<Person>();
+            var people = new List<RealPerson>();
 
             var queryResult  = closestRule.ApplyOn(people);
 
-            queryResult.FirstPerson.Should().BeNull();
-            queryResult.SecondPerson.Should().BeNull();
+            queryResult.OldestRealPerson.Should().BeOfType<NoPerson>();
+            queryResult.YoungestRealPerson.Should().BeOfType<NoPerson>();
         }
 
 
         [Test]
         public void Returns_Empty_Results_When_Given_One_Person()
         {
-            var people = new List<Person> { sue };
+            var people = new List<RealPerson> { sue };
 
             var queryResult = closestRule.ApplyOn(people);
 
-            queryResult.FirstPerson.Should().BeNull();
-            queryResult.SecondPerson.Should().BeNull();
+            queryResult.OldestRealPerson.Should().BeOfType<NoPerson>();
+            queryResult.YoungestRealPerson.Should().BeOfType<NoPerson>();
         }
 
 
         [Test]
         public void Returns_Closest_Two_For_Two_People()
         {
-            var people = new List<Person> { sue, greg };
+            var people = new List<RealPerson> { sue, greg };
 
 
             var queryResult = closestRule.ApplyOn(people);
 
-            queryResult.FirstPerson.Should().Be(sue);
-            queryResult.SecondPerson.Should().Be(greg);
+            queryResult.OldestRealPerson.Should().Be(sue);
+            queryResult.YoungestRealPerson.Should().Be(greg);
         }
 
 
         [Test]
         public void Returns_Closest_Two_For_Four_People()
         {
-            var people = new List<Person> { greg, mike, sarah, sue };
+            var people = new List<RealPerson> { greg, mike, sarah, sue };
 
             var queryResult = closestRule.ApplyOn(people);
 
-            queryResult.FirstPerson.Should().Be(sue);
-            queryResult.SecondPerson.Should().Be(greg);
+            queryResult.OldestRealPerson.Should().Be(sue);
+            queryResult.YoungestRealPerson.Should().Be(greg);
         }
     }
 

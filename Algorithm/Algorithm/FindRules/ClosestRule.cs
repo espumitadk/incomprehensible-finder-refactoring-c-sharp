@@ -6,41 +6,41 @@ namespace Algorithm.FindRules
 {
     public class ClosestRule : Rule
     {
-        public virtual QueryResult ApplyOn(List<Person> people)
+        public virtual FindResults ApplyOn(List<RealPerson> people)
         {
-            return NotEnough(people) ? new QueryResult() : Find(people);
+            return NotEnough(people) ? FindResults.NoFindResults() : Find(people);
         }
 
-        private bool NotEnough(List<Person> people)
+        private bool NotEnough(List<RealPerson> people)
         {
             return people.Count < 2;
         }
         
-        private QueryResult Find(List<Person> people)
+        private FindResults Find(List<RealPerson> people)
         {     
             var orderPeople = OrderInAsceningOrder(people);
-            var queryResult = new QueryResult(orderPeople.First(), orderPeople[1]);
+            var queryResult = new FindResults(orderPeople.First(), orderPeople[1]);
             for (int i = 2; i < orderPeople.Count; i++)
             {
                 if (PeopleHasCloserBirthDate(orderPeople[i - 1], orderPeople[i], queryResult))
                 {
-                    queryResult = new QueryResult(orderPeople[i - 1], orderPeople[i]);
+                    queryResult = new FindResults(orderPeople[i - 1], orderPeople[i]);
                 }
             }
             return queryResult;
         }
 
-        private List<Person> OrderInAsceningOrder(List<Person> people)
+        private List<RealPerson> OrderInAsceningOrder(List<RealPerson> people)
         {
             return people.OrderBy(x => x.BirthDate).ToList();
         }
 
-        private bool PeopleHasCloserBirthDate(Person younger, Person older, QueryResult queryResult)
+        private bool PeopleHasCloserBirthDate(RealPerson younger, RealPerson older, FindResults findResults)
         {
-            return BirthDateDiference(younger, older) < queryResult.BirthDateDiference;
+            return BirthDateDiference(younger, older) < findResults.BirthDateDiference;
         }
 
-        private static TimeSpan BirthDateDiference(Person younger, Person older)
+        private static TimeSpan BirthDateDiference(RealPerson younger, RealPerson older)
         {
             return older.BirthDate - younger.BirthDate;
         }
