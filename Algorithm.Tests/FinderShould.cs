@@ -24,7 +24,7 @@ namespace Algorithm.Tests
         public void apply_the_find_closest_rule()
         {
             var closestRule = Substitute.For<ClosestRule>();
-            closestRule.ApplyOn(people).Returns(FindResults.NoFindResults());
+            closestRule.ApplyOn(people).Returns(FindResults.NoResults());
 
             finder.FindUsing(closestRule);
 
@@ -35,7 +35,7 @@ namespace Algorithm.Tests
         public void apply_the_find_furthest_rule()
         {
             var furthestRule = Substitute.For<FurthestRule>();
-            furthestRule.ApplyOn(people).Returns(FindResults.NoFindResults());
+            furthestRule.ApplyOn(people).Returns(FindResults.NoResults());
 
             finder.FindUsing(furthestRule);
 

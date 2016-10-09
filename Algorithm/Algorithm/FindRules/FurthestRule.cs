@@ -7,7 +7,7 @@ namespace Algorithm.FindRules
     {
         public virtual FindResults ApplyOn(List<RealPerson> people)
         {
-            return NotEnough(people) ? FindResults.NoFindResults() : Find(people);
+            return NotEnough(people) ? FindResults.NoResults() : Find(people);
         }
 
         private bool NotEnough(List<RealPerson> people)

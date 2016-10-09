@@ -8,7 +8,7 @@ namespace Algorithm
         public Person YoungestRealPerson { get; set; }
         public TimeSpan BirthDateDiference { get; set; }
 
-        public static FindResults NoFindResults()
+        public static FindResults NoResults()
         {
             return new FindResults(new NoPerson(), new NoPerson());
         }
