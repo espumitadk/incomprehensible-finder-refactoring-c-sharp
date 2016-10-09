@@ -17,32 +17,28 @@ namespace Algorithm.FindRules
         }
         
         private FindResults Find(List<RealPerson> people)
-        {     
+        {
             var sortPeople = SortInAsceningOrder(people);
-            var queryResult = new FindResults(sortPeople.First(), sortPeople[1]);
-            for (int i = 2; i < sortPeople.Count; i++)
-            {
-                if (PeopleHasCloserBirthDate(sortPeople[i - 1], sortPeople[i], queryResult))
-                {
-                    queryResult = new FindResults(sortPeople[i - 1], sortPeople[i]);
-                }
-            }
-            return queryResult;
+            var index = YoungestIndex(BirthDateDiferences(sortPeople));
+            return new FindResults(sortPeople[index], sortPeople[index + 1]);
+        }
+
+        private static int YoungestIndex(List<TimeSpan> birthDateDiferences)
+        {
+            return birthDateDiferences.IndexOf(birthDateDiferences.Min());
+        }
+
+        private static List<TimeSpan> BirthDateDiferences(List<RealPerson> sortPeople)
+        {
+            return sortPeople
+                .Take(sortPeople.Count - 1)
+                .Select((x, i) => sortPeople[i + 1].BirthDate - x.BirthDate)
+                .ToList();
         }
 
         private List<RealPerson> SortInAsceningOrder(List<RealPerson> people)
         {
             return people.OrderBy(x => x.BirthDate).ToList();
-        }
-
-        private bool PeopleHasCloserBirthDate(RealPerson younger, RealPerson older, FindResults findResults)
-        {
-            return BirthDateDiference(younger, older) < findResults.BirthDateDiference;
-        }
-
-        private static TimeSpan BirthDateDiference(RealPerson younger, RealPerson older)
-        {
-            return older.BirthDate - younger.BirthDate;
         }
     }
 }
