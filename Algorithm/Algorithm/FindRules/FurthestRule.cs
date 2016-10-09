@@ -17,8 +17,8 @@ namespace Algorithm.FindRules
 
         private FindResults Find(List<RealPerson> people)
         {
-            var orderPeople = SortInAsceningOrder(people);
-            return new FindResults(orderPeople.First(), orderPeople.Last());
+            var sortPeople = SortInAsceningOrder(people);
+            return new FindResults(sortPeople.First(), sortPeople.Last());
         }
 
         private List<RealPerson> SortInAsceningOrder(List<RealPerson> people)

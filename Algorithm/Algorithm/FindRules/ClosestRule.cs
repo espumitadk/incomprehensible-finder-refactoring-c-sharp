@@ -18,19 +18,19 @@ namespace Algorithm.FindRules
         
         private FindResults Find(List<RealPerson> people)
         {     
-            var orderPeople = OrderInAsceningOrder(people);
-            var queryResult = new FindResults(orderPeople.First(), orderPeople[1]);
-            for (int i = 2; i < orderPeople.Count; i++)
+            var sortPeople = SortInAsceningOrder(people);
+            var queryResult = new FindResults(sortPeople.First(), sortPeople[1]);
+            for (int i = 2; i < sortPeople.Count; i++)
             {
-                if (PeopleHasCloserBirthDate(orderPeople[i - 1], orderPeople[i], queryResult))
+                if (PeopleHasCloserBirthDate(sortPeople[i - 1], sortPeople[i], queryResult))
                 {
-                    queryResult = new FindResults(orderPeople[i - 1], orderPeople[i]);
+                    queryResult = new FindResults(sortPeople[i - 1], sortPeople[i]);
                 }
             }
             return queryResult;
         }
 
-        private List<RealPerson> OrderInAsceningOrder(List<RealPerson> people)
+        private List<RealPerson> SortInAsceningOrder(List<RealPerson> people)
         {
             return people.OrderBy(x => x.BirthDate).ToList();
         }
