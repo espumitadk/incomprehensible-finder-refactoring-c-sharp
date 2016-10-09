@@ -6,7 +6,7 @@ namespace Algorithm
     {
         public Person OldestRealPerson { get; set; }
         public Person YoungestRealPerson { get; set; }
-        public TimeSpan BirthDateDiference { get; set; }
+        public TimeSpan BirthDateDifference { get; set; }
 
         public static FindResults NoResults()
         {
@@ -17,14 +17,14 @@ namespace Algorithm
         {
             this.OldestRealPerson = oldestRealPerson;
             YoungestRealPerson = youngestRealPerson;
-            CalculateBirthDateDiference(oldestRealPerson, youngestRealPerson);
+            CalculateBirthDateDifference(oldestRealPerson, youngestRealPerson);
         }
         
 
-        private void CalculateBirthDateDiference(Person oldestRealPerson, Person youngestRealPerson)
+        private void CalculateBirthDateDifference(Person oldestRealPerson, Person youngestRealPerson)
         {
             if (oldestRealPerson is RealPerson && youngestRealPerson is RealPerson)
-                    BirthDateDiference =  ((RealPerson) youngestRealPerson).BirthDate - ((RealPerson) oldestRealPerson).BirthDate;
+                    BirthDateDifference =  ((RealPerson) youngestRealPerson).BirthDate - ((RealPerson) oldestRealPerson).BirthDate;
         }
     }
 }

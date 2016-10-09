@@ -19,8 +19,8 @@ namespace Algorithm.FindRules
         private FindResults Find(List<RealPerson> people)
         {
             var sortPeople = SortInAsceningOrder(people);
-            var index = YoungestIndex(BirthDateDiferences(sortPeople));
-            return new FindResults(sortPeople[index], sortPeople[index + 1]);
+            var youngestIndex = YoungestIndex(BirthDateDifferences(sortPeople));
+            return new FindResults(sortPeople[youngestIndex], sortPeople[youngestIndex + 1]);
         }
 
         private static int YoungestIndex(List<TimeSpan> birthDateDiferences)
@@ -28,7 +28,7 @@ namespace Algorithm.FindRules
             return birthDateDiferences.IndexOf(birthDateDiferences.Min());
         }
 
-        private static List<TimeSpan> BirthDateDiferences(List<RealPerson> sortPeople)
+        private static List<TimeSpan> BirthDateDifferences(List<RealPerson> sortPeople)
         {
             return sortPeople
                 .Take(sortPeople.Count - 1)
